@@ -21,7 +21,7 @@
 
             <ul class="flex justify-end mt-3 text-xl space-x-4">
                 <li>
-                    <a href="#"
+                    <a href="{{ route('member') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
                 </li>
                 <li>
@@ -41,11 +41,17 @@
                         class="inline-block text-sm px-5 py-2.5 -mr-14 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-300 hover:bg-white mt-4 md:mt-0">Login</a>
                 </li> -->
                 <div>
-                    <button class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                        <a href="#" class="flex items-center justify-center">
-                            <i class="fa-solid fa-user text-lg"></i>
+                    <div class="flex items-center">
+                        <a href="{{ route('profile.show') }}" class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                            Profile
                         </a>
-                    </button>  
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="font-extrabold text-sm px-4 py-3 ml-2 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </ul>
         </div>
@@ -168,7 +174,7 @@
             <p class="text-5xl font-kanit mb-8 text-center text-gray-700 -mt-6 ">กุญแจ</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
                 <!-- กล่องที่ 1 -->
-                <a href="./detail.html" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="{{ route('detail') }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">

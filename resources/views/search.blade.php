@@ -19,7 +19,7 @@
             </div>
             <ul class="flex justify-end mt-3 text-xl space-x-4">
                 <li>
-                    <a href="#"
+                    <a href="{{ route('member') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
                 </li>
                 <li>
@@ -35,12 +35,17 @@
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">พบของหาย</a>
                 </li>
                 <div>
-                    <button
-                        class="font-extrabold text-sm px-3 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                        <a href="#" class="flex items-center justify-center">
-                            <i class="fa-solid fa-user text-lg"></i>
+                    <div class="flex items-center">
+                        <a href="{{ route('profile.show') }}" class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                            Profile
                         </a>
-                    </button>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="font-extrabold text-sm px-4 py-3 ml-2 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </ul>
         </div>

@@ -8,24 +8,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',function (){
     return view(('firstPage'));
-});
+})->name('firstPage');
 
 Route::get('/search',function(){
     return view(('search'));
-});
+})->name('search');
 
 Route::get('/popularItem',function(){
     return view(('popularItem'));
-});
+})->name('popularItem');
 
 Route::get('/member', function () {
     return view('member');
-})->middleware('auth');
-
+})->middleware('auth')->name('member');
 
 Route::get('/detail',function(){
     return view('detail');
-});
+})->name('detail');
 
 
 Route::middleware([

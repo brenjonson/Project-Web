@@ -59,7 +59,7 @@
         <div class="container mx-auto p-6 ">
             <!-- ส่วนบน -->
             <div class="flex justify-start items-center space-x-4 ">
-                <a href="./popularItem.html" class="text-black hover:text-orange-600">
+                <a href="./popularItem" class="text-black hover:text-orange-600">
                     <i class="fa-solid fa-arrow-left w-12"></i>
                 </a>
                 <div class="flex flex-col space-y-2">
