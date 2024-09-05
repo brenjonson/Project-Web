@@ -26,6 +26,10 @@ Route::get('/detail',function(){
     return view('detail');
 })->name('detail');
 
+Route::get('/editProfile',function(){
+    return view('editProfile');
+})->name('editProfile');
+
 
 Route::middleware([
     'auth:sanctum',
