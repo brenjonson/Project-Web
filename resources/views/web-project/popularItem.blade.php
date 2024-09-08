@@ -25,11 +25,11 @@
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ route('search') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ route('upload') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
                 </li>
                 <li>
@@ -42,7 +42,7 @@
                 </li> -->
                 <div>
                     <div class="flex items-center">
-                        <a href="{{ route('profile.show') }}" class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                        <a href="{{ route('profile') }}" class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
                             Profile
                         </a>
                         <form method="POST" action="{{ route('logout') }}">

@@ -18,16 +18,23 @@
                 <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
             </div>
             <ul class="flex justify-end mt-3 text-xl space-x-4">
+                @if(auth()->check())
+                    <li>
+                        <a href="{{ route('member') }}"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('firstPage') }}"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
+                    </li>
+                @endif
                 <li>
-                    <a href="{{ route('member') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                </li>
-                <li>
-                    <a href="#"
+                    <a href="{{ route('search') }}"
                         class="px-4 text-white font-kanit bg-gray-700  p-22px transition duration-300 ease-in-out">ค้นหาของหาย</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ route('upload') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
                 </li>
                 <li>

@@ -1,0 +1,17 @@
+h1{
+    font-family: 'Kanit', sans-serif;
+    font-size: xx-large;
+    text-align: center;
+    padding: 20px 10px 0px 10px;
+}
+h2{
+    font-family: 'Kanit', sans-serif;
+    font-size: 120%;
+    text-align: center;
+    padding: 0px 0px 0px;
+}
+div{
+    color: aliceblue;
+    font-family: 'Kanit';
+    
+}

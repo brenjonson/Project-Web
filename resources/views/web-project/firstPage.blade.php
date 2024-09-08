@@ -4,57 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member</title>
+    <title>Firstpage</title>
     @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="">
     <nav class="bg-orange-700 ">
 
-        <div class="container mx-auto p-5 py-2 flex justify-between">
+        <div class="container mx-auto p-5 py-2 flex justify-between items-center">
             <div class="flex items-center">
                 <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
             </div>
-
-            <ul class="flex justify-end mt-3 text-xl space-x-4">
-                <li>
-                    <a href="{{ route('member') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                </li>
-                <li>
-                    <a href="{{ route('search') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">พบของหาย</a>
-                </li>
-                <!-- <li>
-                    <a href="#"
-                        class="inline-block text-sm px-5 py-2.5 -mr-14 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-300 hover:bg-white mt-4 md:mt-0">Login</a>
-                </li> -->
+        
+            <div class="flex items-center space-x-4">
+                <ul class="flex justify-end text-xl space-x-4">
+                    <li>
+                        <a href="#"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('search') }}"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">พบของหาย</a>
+                    </li>
+                </ul>
                 <div>
-                    <div class="flex items-center">
-                        <a href="{{ route('profile.show') }}" class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                            Profile
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="font-extrabold text-sm px-4 py-3 ml-2 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                                Log Out
-                            </button>
-                        </form>
-                    </div>
+                    <a href="/login" class="inline-block bg-orange-600 text-white font-semibold py-2 px-5 rounded-md hover:bg-orange-700 shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        Login
+                    </a>
                 </div>
-            </ul>
+            </div>
         </div>
+        
     </nav>
 
     <header>
@@ -68,12 +56,12 @@
                 <a href="{{ route('popularItem') }}">ของที่หายบ่อย</a>
             </button>
             <button
-                class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700">
-                <a href="#">พบของหาย</a>
+                class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700 mr-14">
+                <a href="./login">เข้าสู่ระบบ</a>
             </button>
             <button
-                class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700 ml-14">
-                <a href="#">แจ้งของหาย</a>
+                class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700">
+                <a href="./register">ลงชื่อเข้าใช้</a>
             </button>
         </div>
     </header>
@@ -85,8 +73,7 @@
             <p class="text-5xl font-kanit mb-8 text-center text-gray-900 -mt-6 ">ของที่แจ้งหาย</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
 
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -101,8 +88,7 @@
                 </a>
 
                 <!-- กล่องที่ 2 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -117,8 +103,7 @@
                 </a>
 
                 <!-- กล่องที่ 3 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -133,8 +118,7 @@
                 </a>
 
                 <!-- กล่องที่4 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -149,8 +133,7 @@
                 </a>
 
                 <!-- กล่องที่ 5 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -165,8 +148,7 @@
                 </a>
 
                 <!-- กล่องที่ 6 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -187,8 +169,7 @@
             <p class="text-5xl font-kanit mb-8 text-center text-gray-700 -mt-6 ">พบของที่หาย</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
                 <!-- กล่องที่ 1 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -203,8 +184,7 @@
                 </a>
 
                 <!-- กล่องที่ 2 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -219,8 +199,7 @@
                 </a>
 
                 <!-- กล่องที่ 3 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -235,8 +214,7 @@
                 </a>
 
                 <!-- กล่องที่4 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -251,8 +229,7 @@
                 </a>
 
                 <!-- กล่องที่ 5 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -267,8 +244,7 @@
                 </a>
 
                 <!-- กล่องที่ 6 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -283,7 +259,7 @@
                 </a>
             </div>
 
-        </div> <!-- End พบของหาย -->
+        </div>  <!-- End พบของหาย -->
 
 
         <div class="bg-slate-100 rounded-lg mt-5 flex flex-col items-center py-24 mx-auto w-3/4 shadow-2xl">
@@ -291,8 +267,7 @@
             <p class="text-5xl font-kanit mb-8 text-center text-gray-700 -mt-6 ">ของที่รับไปแล้ว</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
 
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -307,8 +282,7 @@
                 </a>
 
                 <!-- กล่องที่ 2 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -323,8 +297,7 @@
                 </a>
 
                 <!-- กล่องที่ 3 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -339,8 +312,7 @@
                 </a>
 
                 <!-- กล่องที่4 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -355,8 +327,7 @@
                 </a>
 
                 <!-- กล่องที่ 5 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -371,8 +342,7 @@
                 </a>
 
                 <!-- กล่องที่ 6 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                     <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                         <div class="flex-shrink-0"> <!--รูปภาพ-->
                             <img src="./img/4.png" alt="" class="h-12 w-12">
@@ -389,7 +359,7 @@
 
         </div> <!-- End ของที่รับไปแล้ว -->
 
-    </main> <!---End main-->
+    </main>  <!---End main-->
 
     <!-- Footer -->
     <footer class="bg-orange-700 text-white p-4 mt-8">
@@ -402,7 +372,6 @@
             </ul>
         </div>
     </footer>
-
 
 </body>
 
