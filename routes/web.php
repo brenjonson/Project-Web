@@ -12,24 +12,36 @@ Route::get('/firstPage',function (){
 })->name('firstPage');
 
 Route::get('/search',function(){
-    return view(('search'));
+    return view(('web-project/search'));
 })->name('search');
 
-Route::get('/popularItem',function(){
-    return view(('popularItem'));
-})->name('popularItem');
+Route::get('/popularItem',[FileUploadController::class, 'showItem'])->name('popularItem');
 
 Route::get('/member', function () {
-    return view('member');
+    return view('web-project/member');
 })->middleware('auth')->name('member');
 
 Route::get('/detail',function(){
-    return view('detail');
+    return view('web-project/detail');
 })->name('detail');
 
+Route::get('/profile', function (){
+    return view('profile');
+})->middleware('auth')->name('profile');
+
 Route::get('/editProfile',function(){
-    return view('editProfile');
-})->name('editProfile');
+    return view('web-project/editProfile');
+})->middleware('auth')->name('editProfile');
+
+Route::get('/upload', function(){
+    return view('web-project/upload');
+})->middleware('auth')->name('upload');
+
+Route::post('/upload', [FileUploadController::class, 'upload']);
+
+Route::get('/lost', function(){
+    return view('LostItemFound');
+});
 
 Route::get('/profile',function(){
     return view('profile');

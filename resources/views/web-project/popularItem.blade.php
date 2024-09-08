@@ -29,6 +29,50 @@
 
 <body class="">
     @include('layouts.navbar')
+    <nav class="bg-orange-700 ">
+
+        <div class="container mx-auto p-5 py-2 flex justify-between">
+            <div class="flex items-center">
+                <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
+            </div>
+
+            <ul class="flex justify-end mt-3 text-xl space-x-4">
+                <li>
+                    <a href="{{ route('member') }}"
+                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
+                </li>
+                <li>
+                    <a href="{{ route('search') }}"
+                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
+                </li>
+                <li>
+                    <a href="{{ route('upload') }}"
+                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">พบของหาย</a>
+                </li>
+                <!-- <li>
+                    <a href="#"
+                        class="inline-block text-sm px-5 py-2.5 -mr-14 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-300 hover:bg-white mt-4 md:mt-0">Login</a>
+                </li> -->
+                <div>
+                    <div class="flex items-center">
+                        <a href="{{ route('profile') }}" class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                            Profile
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="font-extrabold text-sm px-4 py-3 ml-2 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
 
     <header>
         <div>

@@ -1,4 +1,50 @@
 @extends('layouts.navbar')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firstpage</title>
+    @vite('resources/css/app.css')
+</head>
+
+<body class="">
+    <nav class="bg-orange-700 ">
+
+        <div class="container mx-auto p-5 py-2 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
+            </div>
+        
+            <div class="flex items-center space-x-4">
+                <ul class="flex justify-end text-xl space-x-4">
+                    <li>
+                        <a href="#"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('search') }}"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">พบของหาย</a>
+                    </li>
+                </ul>
+                <div>
+                    <a href="/login" class="inline-block bg-orange-600 text-white font-semibold py-2 px-5 rounded-md hover:bg-orange-700 shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </nav>
 
 @section('content')
 @include('layouts.banner')
@@ -8,6 +54,10 @@
         </div>
 
         <div class="container flex justify-center mt-8 max-w-full ">
+            <button
+                class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700 mr-14">
+                <a href="{{ route('popularItem') }}">ของที่หายบ่อย</a>
+            </button>
             <button
                 class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700 mr-14">
                 <a href="./login">เข้าสู่ระบบ</a>
