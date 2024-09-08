@@ -40,8 +40,10 @@ Route::get('/upload', function(){
 Route::post('/upload', [FileUploadController::class, 'upload']);
 
 Route::get('/lost', function(){
-    return view('LostItemFound');
-});
+    return view('web-project/LostItemFound');
+})->middleware('auth')->name('lost');
+
+Route::get('/item/{id}', [FileUploadController::class, 'showItemDetail'])->middleware('auth')->name('item.detail');
 
 Route::get('/profile',function(){
     return view('profile');

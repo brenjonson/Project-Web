@@ -51,7 +51,7 @@
                         class="px-4 text-white font-kanit bg-gray-700  p-22px transition duration-300 ease-in-out">ค้นหาของหาย</a>
                 </li>
                 <li>
-                    <a href="{{ route('upload') }}"
+                    <a href="{{ route('lost') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
                 </li>
                 <li>
