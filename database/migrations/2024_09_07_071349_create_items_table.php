@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("type");
             $table->string("detail");
             $table->string("location");
+            $table->string("contact");
             $table->string("img_path")->nullable();
             $table->timestamps();
             $table->softDeletes();
