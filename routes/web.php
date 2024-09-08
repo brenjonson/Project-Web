@@ -34,6 +34,10 @@ Route::get('/profile',function(){
     return view('profile');
 })->name('profile');
 
+Route::get('/upload',function(){
+    return view('upload');
+})->name('upload');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
