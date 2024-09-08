@@ -48,25 +48,33 @@ class FileUploadController extends Controller
         $uploadedFiles = $request->file('files');
         
         // Create new Item
-        $item = new Item();
-        $item->name = $request->name;
-        $item->reporter_name = $request->reporter_name;
-        $item->type = $request->type;
-        $item->detail = $request->detail;
-        $item->save();
+        $newItem = new Item();
+        $newItem->item = $request->item;
+        $newItem->reporter_name = $request->reporter_name;
+        $newItem->type = $request->type;
+        $newItem->detail = $request->detail;
+        $newItem->location = $request->location;
+        $newItem->contact = $request->contact;
+        $newItem->save();
 
         $fileNames = [];
 
         foreach ($uploadedFiles as $index => $file) {
-            $fileName = $item->id . '-' . ($index + 1) . '.' . $file->getClientOriginalExtension();
+            $fileName = $newItem->id . '-' . ($index + 1) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('uploads', $fileName, 'public');
             $fileNames[] = $fileName;
         }
 
         // Update img_path
-        $item->img_path = json_encode($fileNames);
-        $item->save();
+        $newItem->img_path = json_encode($fileNames);
+        $newItem->save();
 
         return back()->with('success', 'Files uploaded successfully')->with('files', json_encode($fileNames));
+    }
+
+    public function showItemDetail($id)
+    {
+        $item = Item::findOrFail($id);
+        return view('web-project/detail', compact('item'));
     }
 }

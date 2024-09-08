@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <script>
+            function toggleDropdown() {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                dropdownMenu.classList.toggle('hidden');
+            }
+    
+            // Close dropdown if clicked outside
+            window.onclick = function (event) {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                if (!event.target.matches('button')) {
+                    if (!dropdownMenu.classList.contains('hidden')) {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                }
+            };
+        </script>
+
 </head>
 
 <body class="">
@@ -41,16 +59,23 @@
                         class="inline-block text-sm px-5 py-2.5 -mr-14 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-300 hover:bg-white mt-4 md:mt-0">Login</a>
                 </li> -->
                 <div>
-                    <div class="flex items-center">
-                        <a href="{{ route('profile') }}" class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                            Profile
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="font-extrabold text-sm px-4 py-3 ml-2 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                                Log Out
-                            </button>
-                        </form>
+
+                    <!-- Dropdown Trigger -->
+                    <button onclick="toggleDropdown()"
+                        class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                        <i class="fa-solid fa-user text-lg"></i>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="dropdownMenu"
+                        class="hidden absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+                        <div class="px-4 py-3">
+                            <p class="text-sm font-medium text-gray-900">My Account</p>
+                        </div>
+                        <div class="py-1">
+                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
                     </div>
                 </div>
             </ul>
@@ -85,15 +110,15 @@
                         }
                     }
                     @endphp
-                    <a href="{{ route('detail', ['id' => $card->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                    <a href="{{ route('item.detail', ['id' => $card->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                         <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                             <div class="flex-shrink-0">
                                 <img src="{{ asset($imagePath ?? 'storage/uploads/') }}" alt="Card Image" class="h-12 w-12 object-cover">
                             </div>
                             <div class="ml-6 pt-1 font-kanit">
-                                <h4 class="text-white text-xl font-bold">บัตรนักศึกษา: {{ $card->name }}</h4>
+                                <h4 class="text-white text-xl font-bold">บัตรนักศึกษา:</h4>
                                 <p class="text-base text-white">ผู้แจ้ง: {{ $card->reporter_name }}</p>
-                                <p class="text-base text-white">สถานที่หาย: {{ $card->detail }}</p>
+                                <p class="text-base text-white">สถานที่หาย: {{ $card->location }}</p>
                                 <p class="text-base text-white">ติดต่อที่: {{ $card->contact ?? 'ไม่ระบุ' }}</p>
                             </div>
                         </div>
@@ -120,15 +145,15 @@
                         }
                     }
                     @endphp
-                    <a href="{{ route('detail', ['id' => $key->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                    <a href="{{ route('item.detail', ['id' => $card->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                         <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                             <div class="flex-shrink-0">
                                 <img src="{{ asset($imagePath ?? 'storage/uploads/') }}" alt="Key Image" class="h-12 w-12 object-cover">
                             </div>
                             <div class="ml-6 pt-1 font-kanit">
-                                <h4 class="text-white text-xl font-bold">กุญแจ: {{ $key->name }}</h4>
+                                <h4 class="text-white text-xl font-bold">กุญแจ:</h4>
                                 <p class="text-base text-white">ผู้แจ้ง: {{ $key->reporter_name }}</p>
-                                <p class="text-base text-white">สถานที่หาย: {{ $key->detail }}</p>
+                                <p class="text-base text-white">สถานที่หาย: {{ $key->location }}</p>
                                 <p class="text-base text-white">ติดต่อที่: {{ $key->contact ?? 'ไม่ระบุ' }}</p>
                             </div>
                         </div>

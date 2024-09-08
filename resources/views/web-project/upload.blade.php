@@ -35,12 +35,18 @@
         <input type="file" name="files[]" multiple>
         <br>
 
+        <label for="text">Reporter name:</label>
+        <input type="text" name="reporter_name" required>
+        <br>
+
         <label for="text">Item:</label>
         <input type="text" name="name" required>
         <br>
 
-        <label for="text">Reporter name:</label>
-        <input type="text" name="reporter_name" required>
+        Type: <select id="" name="type">
+            <option value="key">กุญแจ</option>
+            <option value="money">เงิน</option>
+        </select>
         <br>
 
         <label for="text">detail:</label>
@@ -48,16 +54,14 @@
         <br>
 
         <label for="text">Location:</label>
-        <input type="text" name="reporter_name" required>
+        <input type="text" name="location" required>
         <br>
 
         <!--<label for="img_path">img:</label>-->
+        <label for="text">Contact:</label>
+        <input type="text" name="contact" required>
         <br>
-        <select id="" name="type">
-            <option value="key">กุญแจ</option>
-            <option value="money">เงิน</option>
-        </select>
-        <br>
+        
 
         {{-- <input type="submit" value="Upload"> --}}
         <button type="submit">Upload</button>
