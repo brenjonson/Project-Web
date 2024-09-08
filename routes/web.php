@@ -30,6 +30,9 @@ Route::get('/editProfile',function(){
     return view('editProfile');
 })->name('editProfile');
 
+Route::get('/profile',function(){
+    return view('profile');
+})->name('profile');
 
 Route::middleware([
     'auth:sanctum',
