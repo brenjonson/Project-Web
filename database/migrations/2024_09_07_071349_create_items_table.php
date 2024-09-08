@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("item");
             $table->string("reporter_name");
             $table->string("type");
             $table->string("detail");
+            $table->string("location");
             $table->string("img_path")->nullable();
             $table->timestamps();
             $table->softDeletes();
