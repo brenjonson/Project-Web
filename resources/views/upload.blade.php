@@ -2,7 +2,6 @@
 @extends('layouts.navbar')
 
 @section('contentUpload')
-    @include('layouts/banner')
 
     <h1 class="text-5xl font-bold text-center py-8 text-gray-700 font-kanit">พบของหาย</h1>
 
