@@ -34,7 +34,7 @@ Route::get('/editProfile',function(){
 })->middleware('auth')->name('editProfile');
 
 Route::get('/upload', function(){
-    return view('web-project/upload');
+    return view('web-project/uploadFound');
 })->middleware('auth')->name('upload');
 
 Route::post('/upload', [FileUploadController::class, 'upload']);
@@ -44,6 +44,10 @@ Route::get('/lost', function(){
 })->middleware('auth')->name('lost');
 
 Route::get('/item/{id}', [FileUploadController::class, 'showItemDetail'])->middleware('auth')->name('item.detail');
+
+Route::get('/profile',function(){
+    return view('profile');
+})->name('profile');
 
 
 Route::middleware([

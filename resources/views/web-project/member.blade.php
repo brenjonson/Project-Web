@@ -30,6 +30,18 @@
 </head>
 
 <body class="">
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Success!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+    
     <nav class="bg-orange-700 ">
 
         <div class="container mx-auto p-5 py-2 flex justify-between">
@@ -47,7 +59,7 @@
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
                 </li>
                 <li>
-                    <a href="{{ route('lost') }}"
+                    <a href="{{ route('upload') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งพบของ</a>
                 </li>
                 <li>

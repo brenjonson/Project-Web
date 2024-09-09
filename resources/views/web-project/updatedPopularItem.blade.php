@@ -38,10 +38,17 @@
             </div>
 
             <ul class="flex justify-end mt-3 text-xl space-x-4">
-                <li>
-                    <a href="{{ route('member') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                </li>
+                @if(auth()->check())
+                    <li>
+                        <a href="{{ route('member') }}"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('firstPage') }}"
+                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
+                    </li>
+                @endif
                 <li>
                     <a href="{{ route('search') }}"
                         class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
@@ -59,7 +66,6 @@
                         class="inline-block text-sm px-5 py-2.5 -mr-14 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-300 hover:bg-white mt-4 md:mt-0">Login</a>
                 </li> -->
                 <div>
-
                     <!-- Dropdown Trigger -->
                     <button onclick="toggleDropdown()"
                         class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
@@ -145,7 +151,7 @@
                         }
                     }
                     @endphp
-                    <a href="{{ route('item.detail', ['id' => $card->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                    <a href="{{ route('item.detail', ['id' => $key->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
                         <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
                             <div class="flex-shrink-0">
                                 <img src="{{ asset($imagePath ?? 'storage/uploads/') }}" alt="Key Image" class="h-12 w-12 object-cover">

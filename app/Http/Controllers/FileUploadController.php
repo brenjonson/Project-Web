@@ -69,7 +69,8 @@ class FileUploadController extends Controller
         $newItem->img_path = json_encode($fileNames);
         $newItem->save();
 
-        return back()->with('success', 'Files uploaded successfully')->with('files', json_encode($fileNames));
+        // return back()->with('success', 'Files uploaded successfully')->with('files', json_encode($fileNames));
+        return redirect()->route('member')->with('success', 'Files uploaded successfully');
     }
 
     public function showItemDetail($id)
