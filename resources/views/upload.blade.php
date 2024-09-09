@@ -75,7 +75,7 @@
 
                     <div>
                         <label for="type" class="block mb-2 font-kanit">ประเภทของที่พบ</label>
-                        <select id="type" required
+                        <select name = "type" id="type" required
                             class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                             <option value="" selected>จงเลือกประเภท</option>
                             <option value="monny">เงิน</option>
@@ -101,7 +101,7 @@
 
                     <div>
                         <label for="contact-input" class="block mb-2 font-kanit">ช่องทางการติดต่อ</label>
-                        <input type="text" id="contact-input" required placeholder="กรอกที่นี่"
+                        <input name = "contact" type="text" id="contact-input" required placeholder="กรอกที่นี่"
                             class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
                     </div>
                 </div>

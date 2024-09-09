@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\indexController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileUploadController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -52,7 +53,11 @@ Route::get('/profile',function(){
 Route::get('/upload',function(){
     return view('upload');
 })->name('upload');
-
+// jeng part
+Route::get('/upload2',function(){
+    return view('upload2');
+});
+Route::post('/upload2', [FileUploadController::class, 'upload']);
 Route::get('/index',function(){
     return view('index');
 });
