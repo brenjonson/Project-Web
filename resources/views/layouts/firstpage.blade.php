@@ -1,10 +1,39 @@
-@extends('layouts.navbar')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-@include('layouts.banner')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firstpage</title>
+    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script>
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.toggle('hidden');
+        }
+
+        // Close dropdown if clicked outside
+        window.onclick = function(event) {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            if (!event.target.matches('button')) {
+                if (!dropdownMenu.classList.contains('hidden')) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            }
+        };
+    </script>
+</head>
+
+<body class="">
+    @include('layouts.navbar')
+
     <header>
         <div>
-            <img src="" alt="" class="w-screen">
+            <img src="" alt="" class="w-screen"> 
         </div>
 
         <div class="container flex justify-center mt-8 max-w-full ">
@@ -19,10 +48,11 @@
         </div>
     </header>
 
+
     <main>
         <div class="bg-slate-100 rounded-lg mt-5 flex flex-col items-center py-24 mx-auto w-3/4 shadow-2xl">
             <!---ของที่แจ้งหาย-->
-            <p class="text-5xl font-kanit mb-8 text-center text-gray-700 -mt-6 ">ของที่แจ้งหาย</p>
+            <p class="text-5xl font-kanit mb-8 text-center text-gray-900 -mt-6 ">ของที่แจ้งหาย</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
 
                 <a href="#"
@@ -104,4 +134,7 @@
             </ul>
         </div>
     </footer>
-@endsection
+
+</body>
+
+</html>

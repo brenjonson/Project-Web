@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\indexController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/',function (){
+Route::get('/firstPage',function (){
     return view(('firstPage'));
 })->name('firstPage');
 
@@ -37,6 +38,14 @@ Route::get('/profile',function(){
 Route::get('/upload',function(){
     return view('upload');
 })->name('upload');
+
+Route::get('/index',function(){
+    return view('index');
+});
+
+
+
+
 
 Route::middleware([
     'auth:sanctum',
