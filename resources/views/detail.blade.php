@@ -9,48 +9,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.toggle('hidden');
+        }
+
+        // Close dropdown if clicked outside
+        window.onclick = function(event) {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            if (!event.target.matches('button')) {
+                if (!dropdownMenu.classList.contains('hidden')) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            }
+        };
+    </script>
 </head>
 
 <body class="">
-    <nav class="bg-orange-700 ">
-
-        <div class="container mx-auto p-5 py-2 flex justify-between">
-            <div class="flex items-center">
-                <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
-            </div>
-
-            <ul class="flex justify-end mt-3 text-xl space-x-4">
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งของหาย</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">พบของหาย</a>
-                </li>
-                <!-- <li>
-                    <a href="#"
-                        class="inline-block text-sm px-5 py-2.5 -mr-14 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-300 hover:bg-white mt-4 md:mt-0">Login</a>
-                </li> -->
-                <div>
-                    <button
-                        class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                        <a href="#" class="flex items-center justify-center">
-                            <i class="fa-solid fa-user text-lg"></i>
-                        </a>
-                    </button>
-                </div>
-            </ul>
-        </div>
-    </nav>
+    @include('layouts.navbar')
 
 
 
@@ -141,17 +119,18 @@
                             </div>
                             <img class="w-24 h-24 rounded-full mt-4" src="./img/frank.png" alt="Rounded avatar">
                             <p class="font-bold mt-2 underline">
-                                <a href="#" class="underline" >Franksea</a>
+                                <a href="#" class="underline">Franksea</a>
                             </p>
-                            
+
                         </div>
 
                         <!-- ข้อมูลการติดต่อด้านขวา -->
                         <div class="flex flex-col space-y-2">
                             <div class="flex items-center">
                                 <i class="fa-solid fa-phone mr-2"></i>
-                                <p class="text-gray-600 font-kanit">TEL: <span class="text-orange-600 font-Lato">0885723422
-                                        </span></p>
+                                <p class="text-gray-600 font-kanit">TEL: <span
+                                        class="text-orange-600 font-Lato">0885723422
+                                    </span></p>
                             </div>
                             <div class="flex items-center">
                                 <i class="fa-brands fa-instagram mr-3"></i>
