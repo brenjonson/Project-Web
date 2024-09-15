@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string("location");
             $table->string("contact");
             $table->string("img_path")->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->integer("stage");
             $table->timestamps();
             $table->softDeletes();
         });

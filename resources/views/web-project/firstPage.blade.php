@@ -27,11 +27,11 @@
                             class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
                     </li>
                     <li>
-                        <a href="{{ route('upload') }}"
+                        <a href="{{ route('uploadFound') }}"
                             class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งพบของ</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href=""
                             class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของ</a>
                     </li>
                 </ul>
@@ -55,14 +55,14 @@
                 class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700 mr-14">
                 <a href="{{ route('popularItem') }}">ของที่หายบ่อย</a>
             </button>
-            <button
+            <a href="./login"
                 class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700 mr-14">
-                <a href="./login">เข้าสู่ระบบ</a>
-            </button>
-            <button
+                เข้าสู่ระบบ
+            </a>
+            <a href="./register"
                 class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700">
-                <a href="./register">ลงชื่อเข้าใช้</a>
-            </button>
+                ลงชื่อเข้าใช้
+            </a>
         </div>
     </header>
 

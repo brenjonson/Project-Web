@@ -1,61 +1,35 @@
 <?php
 
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Public routes
+Route::view('/', 'web-project.firstPage')->name('firstPage');
+Route::view('/search', 'web-project.search')->name('search');
+Route::get('/popularItem', [FileUploadController::class, 'showItem'])->name('popularItem');
+Route::get('/item/{id}', [FileUploadController::class, 'showItemDetail'])->name('item.detail');
+Route::get('/search', [FileUploadController::class, 'showForSearch'])->name('search');
+    
+// Authentication routes
+Route::middleware(['auth'])->group(function () {
+    Route::view('/member', 'web-project.member')->name('member');
+    Route::get('/profile', [FileUploadController::class, 'showProfile'])->name('profile');
+    Route::view('/editProfile', 'web-project.editProfile')->name('editProfile');
+    Route::view('/uploadFound', 'web-project.uploadForm.uploadFound')->name('uploadFound');
+    Route::post('/uploadFound', [FileUploadController::class, 'upload']);
+    Route::view('/uploadFind', 'web-project.uploadForm.uploadFind')->name('uploadFind');
+    Route::post('/uploadFind', [FileUploadController::class, 'upload']);
+    Route::post('/location/store', [LocationController::class, 'saveLocation']);;
+    Route::view('/lost', 'web-project.LostItemFound')->name('lost');
+    Route::get('/member', [FileUploadController::class, 'showForMember'])->name('member');
+});
 
-Route::get('/',function (){
-    return view(('web-project/firstPage'));
-})->name('firstPage');
-
-Route::get('/search',function(){
-    return view(('web-project/search'));
-})->name('search');
-
-Route::get('/popularItem',[FileUploadController::class, 'showItem'])->name('popularItem');
-
-Route::get('/member', function () {
-    return view('web-project/member');
-})->middleware('auth')->name('member');
-
-Route::get('/detail',function(){
-    return view('web-project/detail');
-})->name('detail');
-
-Route::get('/profile', function (){
-    return view('profile');
-})->middleware('auth')->name('profile');
-
-Route::get('/editProfile',function(){
-    return view('web-project/editProfile');
-})->middleware('auth')->name('editProfile');
-
-Route::get('/upload', function(){
-    return view('web-project/uploadFound');
-})->middleware('auth')->name('upload');
-
-Route::post('/upload', [FileUploadController::class, 'upload']);
-
-Route::get('/lost', function(){
-    return view('web-project/LostItemFound');
-})->middleware('auth')->name('lost');
-
-Route::get('/item/{id}', [FileUploadController::class, 'showItemDetail'])->middleware('auth')->name('item.detail');
-
-Route::get('/profile',function(){
-    return view('profile');
-})->name('profile');
-
-
+// Jetstream dashboard route
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
 });

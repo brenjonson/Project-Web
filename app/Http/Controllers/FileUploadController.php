@@ -11,8 +11,28 @@ class FileUploadController extends Controller
     public function showItem()
     {
         $items = Item::all(); // Fetch all items
-        return view('web-project/updatedPopularItem', compact('items'));
+        return view('web-project.updatedPopularItem', compact('items'));
     }
+
+    public function showForMember() 
+    {
+        $itemsForMember = Item::all();
+        return view('web-project.member', compact('itemsForMember')); 
+    }
+
+    public function showForSearch() 
+    {
+        $itemsForSearch = Item::all();
+        return view('web-project.search', compact('itemsForSearch')); 
+    }
+
+    public function showProfile()
+    {
+        $itemsForProfile = Item::all();;
+        return view('web-project.profile', compact('itemsForProfile'));
+    }
+
+
 
     public function upload(Request $request)
     {
@@ -55,6 +75,9 @@ class FileUploadController extends Controller
         $newItem->detail = $request->detail;
         $newItem->location = $request->location;
         $newItem->contact = $request->contact;
+        $newItem->stage = $request->stage;
+        $newItem->latitude = $request->latitude;
+        $newItem->longitude = $request->longitude;
         $newItem->save();
 
         $fileNames = [];
@@ -76,6 +99,8 @@ class FileUploadController extends Controller
     public function showItemDetail($id)
     {
         $item = Item::findOrFail($id);
-        return view('web-project/detail', compact('item'));
+        return view('web-project.detail', compact('item'));
     }
+
+    
 }

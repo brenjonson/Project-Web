@@ -1,86 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.navbar')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-        <script>
-            function toggleDropdown() {
-                const dropdownMenu = document.getElementById('dropdownMenu');
-                dropdownMenu.classList.toggle('hidden');
-            }
-    
-            // Close dropdown if clicked outside
-            window.onclick = function (event) {
-                const dropdownMenu = document.getElementById('dropdownMenu');
-                if (!event.target.matches('button')) {
-                    if (!dropdownMenu.classList.contains('hidden')) {
-                        dropdownMenu.classList.add('hidden');
-                    }
-                }
-            };
-        </script>
-</head>
-
-<body>
-    <nav class="bg-orange-700">
-        <div class="container mx-auto p-5 py-2 flex justify-between">
-            <div class="flex items-center">
-                <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
-            </div>
-            <ul class="flex justify-end mt-3 text-xl space-x-4">
-                @if(auth()->check())
-                    <li>
-                        <a href="{{ route('member') }}"
-                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('firstPage') }}"
-                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                    </li>
-                @endif
-                <li>
-                    <a href="{{ route('search') }}"
-                        class="px-4 text-white font-kanit bg-gray-700  p-22px transition duration-300 ease-in-out">ค้นหาของหาย</a>
-                </li>
-                <li>
-                    <a href="{{ route('upload') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งพบของ</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของ</a>
-                </li>
-                <div>
-                    <!-- Dropdown Trigger -->
-                    <button onclick="toggleDropdown()"
-                        class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                        <i class="fa-solid fa-user text-lg"></i>
-                    </button>
-
-                    <!-- Dropdown Menu -->
-                    <div id="dropdownMenu"
-                        class="hidden absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
-                        <div class="px-4 py-3">
-                            <p class="text-sm font-medium text-gray-900">My Account</p>
-                        </div>
-                        <div class="py-1">
-                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-        </div>
-    </nav>
-
+@section('content')
 
     <header>
 
@@ -113,10 +33,11 @@
                     <select id="small_select"
                         class="border-2 font-kanit border-gray-300 text-gray-500 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none">
                         <option selected>เลือกประเภท</option>
-                        <option value="card">บัตรประชาชน/นักศึกษา</option>
                         <option value="key">กุญแจ</option>
-                        <option value="money">เงิน</option>
-                        <option value="tech">อุปกรณ์อิเล็กทรอนิค</option>
+                        <option value="phone">โทรศัพท์/แท็บเล็ต</option>
+                        <option value="bagpack">กระเป๋า</option>
+                        <option value="decorations">เครื่องประดับ</option>
+                        <option value="student_card">บัตรนักศึกษา</option>
                     </select>
                 </div>
 
@@ -126,28 +47,47 @@
 
     <main>
         <div class="container mx-auto p-5 py-2 flex gap-40">
-            <!-- photo -->
-            <div class="">
-                <img src="./img/mapY.png" alt="" class="">
+            <!-- Map Section -->
+            <div class="map-container" style="position: relative; width: 954px; height: 1559px;">
+                <img src="./img/fansmap.png" alt="Map" style="width: 100%; height: 100%;">
+                <div id="markers-container"></div>
             </div>
+
 
             <!-- ด้านขวา -->
             <div class="flex flex-col  justify-start gap-5">
                 <!-- กล่องที่ 1 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
+                    @forelse($itemsForSearch as $found)
+                        @php
+                        $imageExtensions = ['jpg', 'png', 'jpeg', 'gif'];
+                        $imagePath = null;
+                        foreach ($imageExtensions as $ext) {
+                            if (Storage::disk('public')->exists('uploads/' . $found->id . '-1.' . $ext)) {
+                                $imagePath = 'storage/uploads/' . $found->id . '-1.' . $ext;
+                                break;
+                            }
+                        }
+                        @endphp
+                        <a href="{{ route('item.detail', ['id' => $found->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                            <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
+                                <div class="flex-shrink-0">
+                                    <img src="{{ asset($imagePath ?? 'storage/uploads/') }}" alt="Card Image" class="h-12 w-12 object-cover">
+                                </div>
+                                <div class="ml-6 pt-1 font-kanit">
+                                    <h4 class="text-white text-xl font-bold">{{ $found->type }}</h4>
+                                    <p class="text-base text-white">ผู้แจ้ง: {{ $found->reporter_name }}</p>
+                                    <p class="text-base text-white">สถานที่: {{ $found->location }}</p>
+                                    <p class="text-base text-white">ติดต่อที่: {{ $found->contact ?? 'ไม่ระบุ' }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    @empty
+                        <div class="col-span-3 text-center py-8">
+                            <p class="text-2xl font-kanit text-gray-500">ไม่มีข้อมูลแจ้งพบของในขณะนี้</p>
                         </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">บัตรนักศึกษา:James</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: อรรณพ แสงศิลา</p>
-                            <p class="text-base text-white">สถานที่หาย: SC.09 หน้าห้อง 9127</p>
-                            <p class="text-base text-white">ติดต่อที่: 087-6543210</p>
-                        </div>
-                    </div>
-                </a>
+                    @endforelse
+                </div>
                 <!-- กล่องที่ 2 -->
                 <a href="#"
                     class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
@@ -162,86 +102,128 @@
                             <p class="text-base text-white">ติดต่อที่: ig abc_987</p>
                         </div>
                     </div>
-                </a>
-                <!-- กล่องที่ 3 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">บัตรประชาชน:Leo Messi</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- กล่องที่ 4 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">บัตรประชาชน: Allan</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- กล่องที่ 5 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">บัตรประชาชน:Yamal</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- กล่องที่ 6 -->
-                <a href="#"
-                    class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">บัตรนักศึกษา:Mainoo</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
+                </a>           
             </div>
-
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-orange-700 text-white p-4 mt-8">
-        <div class="container mx-auto flex justify-between">
-            <p>&copy; 2024 YourWebsiteName. All rights reserved.</p>
-            <ul class="flex space-x-4">
-                <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-                <li><a href="#" class="hover:underline">Terms of Service</a></li>
-                <li><a href="#" class="hover:underline">Contact Us</a></li>
-            </ul>
-        </div>
-    </footer>
+    @include('layouts.footer')
 
+    <!-- Styles for the markers -->
+    <style>
+        .map-container {
+            position: relative;
+            width: 954px;
+            height: 1559px;
+        }
+        .map-marker {
+            position: absolute;
+            background-image: url("/img/pin-8-24.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            transform: translate(-50%, -100%);
+            cursor: pointer;
+        }
+    </style>
+    
+    <!-- Pass data to JavaScript -->
+    <script>
+        const items = @json($itemsForSearch);
+    </script>
+    
+    <!-- Map Script -->
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mapWidth = 954;
+            const mapHeight = 1559;
+            const latMin = 16.441250;
+            const latMax = 16.482222;
+            const lonMin = 102.806139;
+            const lonMax = 102.832306;
+    
+            const markersContainer = document.getElementById('markers-container');
+    
+            items.forEach(item => {
+                if (item.latitude && item.longitude) {
+                    const lat = parseFloat(item.latitude);
+                    const lon = parseFloat(item.longitude);
+    
+                    // Map latitude and longitude to x and y
+                    const x = ((lon - lonMin) / (lonMax - lonMin)) * mapWidth;
+                    const y = ((latMax - lat) / (latMax - latMin)) * mapHeight;
+    
+                    // Create marker element
+                    const marker = document.createElement('div');
+                    marker.classList.add('map-marker');
+                    marker.style.left = x + 'px';
+                    marker.style.top = y + 'px';
+    
+                    // Optional: Add tooltip or click event
+                    marker.title = `${item.type} reported by ${item.reporter_name}`;
+                    marker.addEventListener('click', () => {
+                        // Redirect to item detail page or show more info
+                        window.location.href = `/item/${item.id}`;
+                    });
+    
+                    // Append marker to container
+                    markersContainer.appendChild(marker);
+                }
+            });
+        });
+    </script> --}}
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const mapImage = document.querySelector('.map-container img');
+        const markersContainer = document.getElementById('markers-container');
+        const latMin = 16.441250;
+        const latMax = 16.482222;
+        const lonMin = 102.806139;
+        const lonMax = 102.832306;
 
-</body>
+        function placeMarkers() {
+            const mapWidth = mapImage.offsetWidth;
+            const mapHeight = mapImage.offsetHeight;
 
-</html>
+            items.forEach(item => {
+                if (item.latitude && item.longitude) {
+                    const lat = parseFloat(item.latitude);
+                    const lon = parseFloat(item.longitude);
+
+                    // Map latitude and longitude to x and y
+                    const x = ((lon - lonMin) / (lonMax - lonMin)) * mapWidth;
+                    const y = ((latMax - lat) / (latMax - latMin)) * mapHeight;
+
+                    // Create marker element
+                    const marker = document.createElement('div');
+                    marker.classList.add('map-marker');
+                    marker.style.left = x + 'px';
+                    marker.style.top = y + 'px';
+
+                    // Optional: Add tooltip or click event
+                    marker.title = `${item.type} reported by ${item.reporter_name}`;
+                    marker.addEventListener('click', () => {
+                        // Redirect to item detail page or show more info
+                        window.location.href = `/item/${item.id}`;
+                    });
+
+                    // Append marker to container
+                    markersContainer.appendChild(marker);
+                }
+            });
+        }
+
+        // Ensure the image has loaded before placing markers
+        if (mapImage.complete) {
+            placeMarkers();
+        } else {
+            mapImage.onload = placeMarkers;
+        }
+    });
+
+    </script>
+
+    
+@endsection

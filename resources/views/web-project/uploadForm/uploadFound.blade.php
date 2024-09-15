@@ -1,61 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.upload')
+@extends('layouts.navbar')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>พบของหาย</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @vite('resources/css/app.css')
-
-    
-</head>
-
-<body class="min-h-screen flex flex-col  text-white">
-
-    <nav class="bg-orange-700">
-
-        <div class="container mx-auto p-5 py-2 flex justify-between">
-            <div class="flex items-center">
-                <img src="./img/4.png" alt="Logo" class="w-28 h-auto max-w-full">
-            </div>
-
-            <ul class="flex justify-end mt-3 text-xl space-x-4">
-                <li>
-                    <a href="{{ route('member') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                </li>
-                <li>
-                    <a href="{{ route('search') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
-                </li>
-                <li>
-                    <a href="{{ route('upload') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งพบของ</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของ</a>
-                </li>
-                <div>
-                    <button
-                        class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                        <a href="#" class="flex items-center justify-center">
-                            <i class="fa-solid fa-user text-lg"></i>
-                        </a>
-                    </button>
-                </div>
-            </ul>
-        </div>
-    </nav>
-
+@section('contentUpload')
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <h1 class="text-5xl font-bold text-center py-8 text-black font-kanit">แจ้งพบของ</h1>
 
     <div class="max-w-3xl bg-gray-700 mx-auto p-8 rounded-xl shadow-2xl">
-        <form action="/upload" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="{{ route('uploadFound') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Left -->
@@ -86,6 +37,7 @@
                         <label for="name-input" class="block mb-2 font-kanit">ชื่อผู้แจ้ง</label>
                         <input type="text" id="name-input" name="reporter_name" required placeholder="กรอกชื่อที่นี่"
                             class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                        <input hidden type="text" name="stage" value=1>
                     </div>
 
                     <div>
@@ -117,7 +69,13 @@
                     <div>
                         <label for="base-input" class="block mb-2 font-kanit">สถานที่พบ</label>
                         <input type="text" id="base-input" name="location" required placeholder="กรอกที่นี่"
-                            class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                            class="w-full mb-2 p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                        <input type="button" onclick="getLocation()" 
+                           class="w-1/2 mb-2 text-white text-sm p-3 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 shadow-lg transform hover:scale-105 transition duration-300 ease-in-out focus:ring-4 focus:ring-red-300 focus:outline-none" value="Use Current Location"/>
+                        <input type="text" id="base-input2" placeholder="Location will appear here" 
+                            class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">   
+                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="longitude" name="longitude">
                     </div>
 
                     <div>
@@ -132,73 +90,12 @@
                     class="w-1/2 text-white text-sm p-3 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 shadow-lg transform hover:scale-105 transition duration-300 ease-in-out focus:ring-4 focus:ring-red-300 focus:outline-none">
                     Submit
                 </button>
-
-
-
-
-
             </div>
         </form>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-orange-700 text-white p-4 mt-8">
-        <div class="container mx-auto flex justify-between">
-            <p>&copy; 2024 YourWebsiteName. All rights reserved.</p>
-            <ul class="flex space-x-4">
-                <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-                <li><a href="#" class="hover:underline">Terms of Service</a></li>
-                <li><a href="#" class="hover:underline">Contact Us</a></li>
-            </ul>
-        </div>
-    </footer>
+    @include('layouts/footer')
 
-    <script>
-        // อัพภาพหลัก
-        document.getElementById('file_input').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
+    <script type="text/javascript" src="{{ asset('js/getLocation.js') }}"></script>
 
-                reader.onload = function(e) {
-                    const imgElement = document.getElementById('preview');
-                    imgElement.src = e.target.result;
-                    imgElement.style.display = 'block';
-                }
-
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // อัพภาพเพิ่มเติม
-        document.getElementById('file_input_more').addEventListener('change', function(event) {
-            const files = event.target.files;
-            const previewContainer = document.getElementById('preview-container');
-            const warningElement = document.getElementById('file_count_warning');
-            previewContainer.innerHTML = '';
-            warningElement.textContent = '';
-
-            if (files.length > 3) {
-                warningElement.textContent = 'คุณสามารถอัปโหลดได้สูงสุด 3 ไฟล์เท่านั้น.';
-                event.target.value = '';
-                return;
-            }
-
-            Array.from(files).forEach(file => {
-                if (file && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.classList.add('w-24', 'h-auto', 'border', 'border-gray-300', 'rounded-lg');
-                        img.alt = 'Image Preview';
-                        previewContainer.appendChild(img);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-    </script>
-</body>
-
-</html>
+@endsection
