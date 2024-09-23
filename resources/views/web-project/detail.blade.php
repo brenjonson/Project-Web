@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 @section('content')
-    
+
     <main class="">
         <div class="container mx-auto p-6">
             <!-- Top section -->
@@ -74,7 +74,7 @@
                                 <i class="fa-solid fa-address-card"></i>
                                 <span class="ml-2 font-semibold">ติดต่อ:</span>
                             </div>
-                            <img class="w-24 h-24 rounded-full mt-4" src="{{ asset('img/default-avatar.png') }}" alt="Rounded avatar">
+                            <img class="w-24 h-24 rounded-full mt-4" src="{{ auth()->user()->profile_photo_url }}" alt="Rounded avatar">
                             <p class="font-bold mt-2 underline">
                                 <a href="{{ route('profile') }}" class="underline">{{ $item->reporter_name }}</a>
                             </p>
@@ -83,7 +83,7 @@
                         <div class="flex flex-col space-y-2">
                             <div class="flex items-center">
                                 <i class="fa-solid fa-phone mr-2"></i>
-                                <p class="text-gray-600 font-kanit">TEL: <span class="text-orange-600 font-Lato">{{ $item->contact }}</span></p>
+                                <p class="text-gray-600 font-kanit">Contact: <span class="text-orange-600 font-Lato">{{ $item->contact }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -92,12 +92,107 @@
 
             <!-- Map section -->
             <div class="mx-auto p-6">
-                <p class="text-2xl">Location</p>
-                <p class="mt-4 font-kanit text-gray-500">{{ $item->location }}</p>
-                <!-- Add a map here if you have coordinates in your database -->
+                <div class="flex items-center">
+                    <p class="text-2xl">Location</p>
+                    <button id="showMapBtn" class="ml-4 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                        <i class="fa-solid fa-arrow-up"></i> Show Map
+                    </button>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- Map Overlay -->
+    <div id="mapOverlay" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden" style="z-index: 1000;">
+        <div class="relative top-10 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Location Map</h3>
+                <div class="mt-2 px-7 py-3">
+                    <div id="mapContainer" class="map-container mt-4">
+                        <div class="map-scroll-container">
+                            <img src="{{ asset('img/fansmap.png') }}" alt="Map" class="map-image">
+                            <div id="markers-container"></div>
+                        </div>
+                    </div>
+                    <div id="noLocationMessage" class="hidden mt-4 text-red-500">
+                        Location information is not available for this item.
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="closeMapBtn" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Styles for the markers and map -->
+    <style>
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+        }
+        .map-scroll-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+        }
+        .map-marker {
+            position: absolute;
+            background-image: url("/img/pin-8-24.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            transform: translate(-50%, -100%);
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- Pass data to JavaScript -->
+    <script>
+        const item = @json($item);
+    </script>
+
+    <script type="text/javascript" src="{{ asset('js/calLocation.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const showMapBtn = document.getElementById('showMapBtn');
+            const closeMapBtn = document.getElementById('closeMapBtn');
+            const mapOverlay = document.getElementById('mapOverlay');
+            const mapContainer = document.getElementById('mapContainer');
+            const noLocationMessage = document.getElementById('noLocationMessage');
+
+            showMapBtn.addEventListener('click', function() {
+                mapOverlay.classList.remove('hidden');
+                if (!window.item.latitude || !window.item.longitude) {
+                    mapContainer.classList.add('hidden');
+                    noLocationMessage.classList.remove('hidden');
+                } else {
+                    mapContainer.classList.remove('hidden');
+                    noLocationMessage.classList.add('hidden');
+                    // Ensure the map image is loaded before placing markers
+                    const mapImage = document.querySelector('.map-container img');
+                    if (mapImage.complete) {
+                        window.placeMarkers($item); 
+                    } else {
+                        mapImage.onload = window.placeMarkers;
+                    }
+                }
+            });
+
+            closeMapBtn.addEventListener('click', function() {
+                mapOverlay.classList.add('hidden');
+            });
+        });
+    </script>
 
     @include('layouts.footer')
 @endsection

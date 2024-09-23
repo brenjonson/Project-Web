@@ -14,16 +14,22 @@ class FileUploadController extends Controller
         return view('web-project.updatedPopularItem', compact('items'));
     }
 
-    public function showForMember() 
+    public function showForMember()
     {
         $itemsForMember = Item::all();
-        return view('web-project.member', compact('itemsForMember')); 
+        return view('web-project.member', compact('itemsForMember'));
     }
 
-    public function showForSearch() 
+    public function showForFP()
+    {
+        $itemsForFP = Item::all();
+        return view('web-project.firstPage', compact('itemsForFP'));
+    }
+
+    public function showForSearch()
     {
         $itemsForSearch = Item::all();
-        return view('web-project.search', compact('itemsForSearch')); 
+        return view('web-project.search', compact('itemsForSearch'));
     }
 
     public function showProfile()
@@ -66,7 +72,7 @@ class FileUploadController extends Controller
 
         // Process valid files
         $uploadedFiles = $request->file('files');
-        
+
         // Create new Item
         $newItem = new Item();
         $newItem->item = $request->item;
@@ -102,5 +108,5 @@ class FileUploadController extends Controller
         return view('web-project.detail', compact('item'));
     }
 
-    
+
 }

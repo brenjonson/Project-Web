@@ -18,12 +18,11 @@
                     </div>
                     <div>
                         <img id="preview" class="mt-4 rounded-lg w-full max-w-xs border border-gray-600"
-                            alt="Image Preview">
+                            src="storage/uploads/Rick.png" alt="Image Preview">
                     </div>
 
                     <div class="mt-6">
-                        <label for="file_input_more" class="block mb-2 font-kanit">อัพโหลดภาพเพิ่มเติม (อัพได้สูงสุด 3
-                            ไฟล์)</label>
+                        <label for="file_input_more" class="block mb-2 font-kanit">อัพโหลดภาพเพิ่มเติม (อัพได้สูงสุด 3 ไฟล์)</label>
                         <input id="file_input_more" name="files[]" type="file" accept="image/*" multiple required
                             class="w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer focus:outline-none dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                         <p id="file_count_warning" class="text-red-500 text-sm mt-2"></p>
@@ -48,7 +47,7 @@
 
                     <div>
                         <label for="type" class="block mb-2 font-kanit">ประเภทของที่พบ</label>
-                        <select id="type" name="type" required 
+                        <select id="type" name="type" required
                             class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                             <option value="" selected>จงเลือกประเภท</option>
                             <option value="key">กุญแจ</option>
@@ -70,10 +69,10 @@
                         <label for="base-input" class="block mb-2 font-kanit">สถานที่พบ</label>
                         <input type="text" id="base-input" name="location" required placeholder="กรอกที่นี่"
                             class="w-full mb-2 p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                        <input type="button" onclick="getLocation()" 
+                        <input type="button" onclick="getLocation()"
                            class="w-1/2 mb-2 text-white text-sm p-3 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 shadow-lg transform hover:scale-105 transition duration-300 ease-in-out focus:ring-4 focus:ring-red-300 focus:outline-none" value="Use Current Location"/>
-                        <input type="text" id="base-input2" placeholder="Location will appear here" 
-                            class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">   
+                        <input type="text" id="base-input2" placeholder="Location will appear here"
+                            class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
                         <input type="hidden" id="latitude" name="latitude">
                         <input type="hidden" id="longitude" name="longitude">
                     </div>

@@ -9,10 +9,9 @@
                 <!-- Account Information -->
                 <div class="px-4 py-5 sm:px-6">
                     <h2 class="text-lg font-medium text-gray-900">Account Information</h2>
-                    <img id="profileImage" src="{{ asset('img/frank.png') }}" alt="User Profile" class="w-16 h-16 rounded-full">
-                    <p class="mt-1 text-sm text-gray-600">{{ auth()->user()->name }}</p>
+                    <img id="profileImage" src="{{ auth()->user()->profile_photo_url }}" alt="User Profile" class="w-16 h-16 rounded-full">
                     <div class="flex justify-end">
-                        <a type="button" id="editProfile" href="#" class="hover:bg-gray-600 rounded-xl">Edit Profile</a>
+                        <a href="{{ route('editProfile') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Edit Profile</a>
                     </div>
                 </div>
 
@@ -76,7 +75,7 @@
                 <div class="rounded overflow-hidden shadow-lg flex flex-col">
                     <!-- Image Section -->
                     <a href="{{ route('item.detail', ['id' => $item->id]) }}" class="relative">
-                        <img class="w-full h-60 object-cover rounded-lg" src="{{ asset($imagePath ?? 'storage/uploads/default.png') }}" alt="{{ $item->type }}">
+                        <img class="w-full h-60 object-cover rounded-lg" src="{{ asset($imagePath ?? 'storage/uploads/Rick.png') }}" alt="{{ $item->type }}">
                         <div class="hover:bg-transparent transition duration-300 absolute inset-0 bg-gray-900 opacity-25"></div>
                         <div class="font-kanit text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3">
                             {{ $item->type }}
@@ -88,7 +87,7 @@
                             {{ $item->title }}
                         </a>
                         <p class="text-gray-500 text-sm">
-                            {{ Str::limit($item->description, 100) }}
+                            {{ Str::limit($item->detail, 100) }}
                         </p>
                     </div>
                     <!-- Footer Section -->
@@ -131,7 +130,7 @@
                     <div class="rounded overflow-hidden shadow-lg flex flex-col">
                         <!-- Image Section -->
                         <a href="{{ route('item.detail', ['id' => $item->id]) }}" class="relative">
-                            <img class="w-full h-60 object-cover rounded-lg" src="{{ asset($imagePath ?? 'storage/uploads/default.png') }}" alt="{{ $item->type }}">
+                            <img class="w-full h-60 object-cover rounded-lg" src="{{ asset($imagePath ?? 'storage/uploads/Rick.png') }}" alt="{{ $item->type }}">
                             <div class="hover:bg-transparent transition duration-300 absolute inset-0 bg-gray-900 opacity-25"></div>
                             <div class="font-kanit text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3">
                                 {{ $item->type }}
@@ -143,7 +142,7 @@
                                 {{ $item->title }}
                             </a>
                             <p class="text-gray-500 text-sm">
-                                {{ Str::limit($item->description, 100) }}
+                                {{ Str::limit($item->detail, 100) }}
                             </p>
                         </div>
                         <!-- Footer Section -->

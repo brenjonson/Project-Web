@@ -27,21 +27,6 @@
                 </div>
             </form>
 
-            <!-- ส่วนล่างSeclect -->
-            <div class="max-w-md">
-                <div class="block w-full mb-2 mt-4">
-                    <select id="small_select"
-                        class="border-2 font-kanit border-gray-300 text-gray-500 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none">
-                        <option selected>เลือกประเภท</option>
-                        <option value="key">กุญแจ</option>
-                        <option value="phone">โทรศัพท์/แท็บเล็ต</option>
-                        <option value="bagpack">กระเป๋า</option>
-                        <option value="decorations">เครื่องประดับ</option>
-                        <option value="student_card">บัตรนักศึกษา</option>
-                    </select>
-                </div>
-
-            </div>
         <div>
     </header>
 
@@ -56,9 +41,22 @@
 
             <!-- ด้านขวา -->
             <div class="flex flex-col  justify-start gap-5">
+                <!-- ส่วนล่างSeclect -->
+                <div class="max-w-md">
+                    <div class="block w-full mb-2 mt-4">
+                        <select id="small_select"
+                            class="border-2 font-kanit border-gray-300 text-gray-500 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none">
+                            <option selected>เลือกประเภท</option>
+                            <option value="key">กุญแจ</option>
+                            <option value="phone">โทรศัพท์/แท็บเล็ต</option>
+                            <option value="bagpack">กระเป๋า</option>
+                            <option value="decorations">เครื่องประดับ</option>
+                            <option value="student_card">บัตรนักศึกษา</option>
+                        </select>
+                    </div>
+                </div>
                 <!-- กล่องที่ 1 -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
-                    @forelse($itemsForSearch as $found)
+                @forelse($itemsForSearch as $found)
                         @php
                         $imageExtensions = ['jpg', 'png', 'jpeg', 'gif'];
                         $imagePath = null;
@@ -75,7 +73,7 @@
                                     <img src="{{ asset($imagePath ?? 'storage/uploads/') }}" alt="Card Image" class="h-12 w-12 object-cover">
                                 </div>
                                 <div class="ml-6 pt-1 font-kanit">
-                                    <h4 class="text-white text-xl font-bold">{{ $found->type }}</h4>
+                                    <h4 class="text-white text-xl font-bold">{{ $found->item }}</h4>
                                     <p class="text-base text-white">ผู้แจ้ง: {{ $found->reporter_name }}</p>
                                     <p class="text-base text-white">สถานที่: {{ $found->location }}</p>
                                     <p class="text-base text-white">ติดต่อที่: {{ $found->contact ?? 'ไม่ระบุ' }}</p>
@@ -86,8 +84,7 @@
                         <div class="col-span-3 text-center py-8">
                             <p class="text-2xl font-kanit text-gray-500">ไม่มีข้อมูลแจ้งพบของในขณะนี้</p>
                         </div>
-                    @endforelse
-                </div>
+                @endforelse
                 <!-- กล่องที่ 2 -->
                 <a href="#"
                     class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
@@ -102,7 +99,7 @@
                             <p class="text-base text-white">ติดต่อที่: ig abc_987</p>
                         </div>
                     </div>
-                </a>           
+                </a>
             </div>
         </div>
     </main>
@@ -127,103 +124,13 @@
             cursor: pointer;
         }
     </style>
-    
+
     <!-- Pass data to JavaScript -->
     <script>
         const items = @json($itemsForSearch);
     </script>
-    
-    <!-- Map Script -->
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mapWidth = 954;
-            const mapHeight = 1559;
-            const latMin = 16.441250;
-            const latMax = 16.482222;
-            const lonMin = 102.806139;
-            const lonMax = 102.832306;
-    
-            const markersContainer = document.getElementById('markers-container');
-    
-            items.forEach(item => {
-                if (item.latitude && item.longitude) {
-                    const lat = parseFloat(item.latitude);
-                    const lon = parseFloat(item.longitude);
-    
-                    // Map latitude and longitude to x and y
-                    const x = ((lon - lonMin) / (lonMax - lonMin)) * mapWidth;
-                    const y = ((latMax - lat) / (latMax - latMin)) * mapHeight;
-    
-                    // Create marker element
-                    const marker = document.createElement('div');
-                    marker.classList.add('map-marker');
-                    marker.style.left = x + 'px';
-                    marker.style.top = y + 'px';
-    
-                    // Optional: Add tooltip or click event
-                    marker.title = `${item.type} reported by ${item.reporter_name}`;
-                    marker.addEventListener('click', () => {
-                        // Redirect to item detail page or show more info
-                        window.location.href = `/item/${item.id}`;
-                    });
-    
-                    // Append marker to container
-                    markersContainer.appendChild(marker);
-                }
-            });
-        });
-    </script> --}}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        const mapImage = document.querySelector('.map-container img');
-        const markersContainer = document.getElementById('markers-container');
-        const latMin = 16.441250;
-        const latMax = 16.482222;
-        const lonMin = 102.806139;
-        const lonMax = 102.832306;
+<script type="text/javascript" src="{{ asset('js/calLocation.js') }}"></script>
 
-        function placeMarkers() {
-            const mapWidth = mapImage.offsetWidth;
-            const mapHeight = mapImage.offsetHeight;
 
-            items.forEach(item => {
-                if (item.latitude && item.longitude) {
-                    const lat = parseFloat(item.latitude);
-                    const lon = parseFloat(item.longitude);
-
-                    // Map latitude and longitude to x and y
-                    const x = ((lon - lonMin) / (lonMax - lonMin)) * mapWidth;
-                    const y = ((latMax - lat) / (latMax - latMin)) * mapHeight;
-
-                    // Create marker element
-                    const marker = document.createElement('div');
-                    marker.classList.add('map-marker');
-                    marker.style.left = x + 'px';
-                    marker.style.top = y + 'px';
-
-                    // Optional: Add tooltip or click event
-                    marker.title = `${item.type} reported by ${item.reporter_name}`;
-                    marker.addEventListener('click', () => {
-                        // Redirect to item detail page or show more info
-                        window.location.href = `/item/${item.id}`;
-                    });
-
-                    // Append marker to container
-                    markersContainer.appendChild(marker);
-                }
-            });
-        }
-
-        // Ensure the image has loaded before placing markers
-        if (mapImage.complete) {
-            placeMarkers();
-        } else {
-            mapImage.onload = placeMarkers;
-        }
-    });
-
-    </script>
-
-    
 @endsection

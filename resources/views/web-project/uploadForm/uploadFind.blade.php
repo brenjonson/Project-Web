@@ -17,7 +17,7 @@
                     </div>
                     <div>
                         <img id="preview" class="mt-4 rounded-lg w-full max-w-xs border border-gray-600"
-                            alt="Image Preview">
+                            src="storage/uploads/Rick.png" alt="Image Preview">
                     </div>
 
                     <div class="mt-6">
@@ -46,7 +46,7 @@
 
                     <div>
                         <label for="type" class="block mb-2 font-kanit text-white">ประเภทของที่หา</label>
-                        <select id="type" name="type" required 
+                        <select id="type" name="type" required
                             class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                             <option value="" selected>จงเลือกประเภท</option>
                             <option value="key">กุญแจ</option>

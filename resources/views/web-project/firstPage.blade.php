@@ -15,7 +15,7 @@
             <div class="flex items-center">
                 <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
             </div>
-        
+
             <div class="flex items-center space-x-4">
                 <ul class="flex justify-end text-xl space-x-4">
                     <li>
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        
+
     </nav>
 
     <header>
@@ -69,198 +69,75 @@
 
     <main>
         <div class="bg-slate-100 rounded-lg mt-5 flex flex-col items-center py-24 mx-auto w-3/4 shadow-2xl">
-            <!---ของที่แจ้งหาย-->
-            <p class="text-5xl font-kanit mb-8 text-center text-gray-900 -mt-6 ">ของที่แจ้งหาย</p>
+            <p class="text-5xl font-kanit mb-8 text-center text-gray-900 -mt-6">แจ้งพบของ</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
-
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
+                @forelse($itemsForFP->where('stage', 1) as $found)
+                    @php
+                    $imageExtensions = ['jpg', 'png', 'jpeg', 'gif'];
+                    $imagePath = null;
+                    foreach ($imageExtensions as $ext) {
+                        if (Storage::disk('public')->exists('uploads/' . $found->id . '-1.' . $ext)) {
+                            $imagePath = 'storage/uploads/' . $found->id . '-1.' . $ext;
+                            break;
+                        }
+                    }
+                    @endphp
+                    <a href="{{ route('item.detail', ['id' => $found->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                        <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
+                            <div class="flex-shrink-0">
+                                <img src="{{ asset($imagePath ?? 'storage/uploads/') }}" alt="Card Image" class="h-12 w-12 object-cover">
+                            </div>
+                            <div class="ml-6 pt-1 font-kanit">
+                                <h4 class="text-white text-xl font-bold">{{ $found->type }}</h4>
+                                <p class="text-base text-white">ผู้แจ้ง: {{ $found->reporter_name }}</p>
+                                <p class="text-base text-white">สถานที่: {{ $found->location }}</p>
+                                <p class="text-base text-white">ติดต่อที่: {{ $found->contact ?? 'ไม่ระบุ' }}</p>
+                            </div>
                         </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">I phone 7 สีดำ</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: อรรณพ แสงศิลา</p>
-                            <p class="text-base text-white">สถานที่หาย: SC.09 หน้าห้อง 9127</p>
-                            <p class="text-base text-white">ติดต่อที่: 087-6543210</p>
-                        </div>
+                    </a>
+                @empty
+                    <div class="col-span-3 text-center py-8">
+                        <p class="text-2xl font-kanit text-gray-500">ไม่มีข้อมูลแจ้งพบของในขณะนี้</p>
                     </div>
-                </a>
-
-                <!-- กล่องที่ 2 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">เงินสด 1000 บาท</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: ณัฐธเนศ กำเนิดกลีม</p>
-                            <p class="text-base text-white">สถานที่หาย: หอสมุดคณะวิศวะ</p>
-                            <p class="text-base text-white">ติดต่อที่: ig abc_987</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่ 3 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่4 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่ 5 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่ 6 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
+                @endforelse
             </div>
-        </div> <!-- End ของที่แจ้งหาย -->
+        </div>
+
 
         <div class="bg-slate-100 rounded-lg mt-5 flex flex-col items-center py-24 mx-auto w-3/4 shadow-2xl">
-            <!---พบของที่หาย-->
-            <p class="text-5xl font-kanit mb-8 text-center text-gray-700 -mt-6 ">พบของที่หาย</p>
+            <p class="text-5xl font-kanit mb-8 text-center text-gray-900 -mt-6">ค้นหาของ</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
-                <!-- กล่องที่ 1 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
+                @forelse($itemsForFP->where('stage', 2) as $find)
+                    @php
+                    $imageExtensions = ['jpg', 'png', 'jpeg', 'gif'];
+                    $imagePath = null;
+                    foreach ($imageExtensions as $ext) {
+                        if (Storage::disk('public')->exists('uploads/' . $find->id . '-1.' . $ext)) {
+                            $imagePath = 'storage/uploads/' . $find->id . '-1.' . $ext;
+                            break;
+                        }
+                    }
+                    @endphp
+                    <a href="{{ route('item.detail', ['id' => $find->id]) }}" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
+                        <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
+                            <div class="flex-shrink-0">
+                                <img src="{{ asset($imagePath ?? 'storage/uploads/') }}" alt="Card Image" class="h-12 w-12 object-cover">
+                            </div>
+                            <div class="ml-6 pt-1 font-kanit">
+                                <h4 class="text-white text-xl font-bold">{{ $find->type }}</h4>
+                                <p class="text-base text-white">ผู้แจ้ง: {{ $find->reporter_name }}</p>
+                                <p class="text-base text-white">สถานที่: {{ $find->location }}</p>
+                                <p class="text-base text-white">ติดต่อที่: {{ $find->contact ?? 'ไม่ระบุ' }}</p>
+                            </div>
                         </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">I phone 7 สีดำ</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: อรรณพ แสงศิลา</p>
-                            <p class="text-base text-white">สถานที่หาย: SC.09 หน้าห้อง 9127</p>
-                            <p class="text-base text-white">ติดต่อที่: 087-6543210</p>
-                        </div>
+                    </a>
+                @empty
+                    <div class="col-span-3 text-center py-8">
+                        <p class="text-2xl font-kanit text-gray-500">ไม่มีข้อมูลแจ้งค้นหาของในขณะนี้</p>
                     </div>
-                </a>
-
-                <!-- กล่องที่ 2 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">เงินสด 1000 บาท</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: ณัฐธเนศ กำเนิดกลีม</p>
-                            <p class="text-base text-white">สถานที่หาย: หอสมุดคณะวิศวะ</p>
-                            <p class="text-base text-white">ติดต่อที่: ig abc_987</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่ 3 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่4 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่ 5 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- กล่องที่ 6 -->
-                <a href="#" class="hover:bg-gray-700 hover:shadow-2xl transition duration-300 ease-in-out hover:-translate-y-2">
-                    <div class="flex p-6 bg-gray-600 rounded-lg shadow-xl">
-                        <div class="flex-shrink-0"> <!--รูปภาพ-->
-                            <img src="./img/4.png" alt="" class="h-12 w-12">
-                        </div>
-                        <div class="ml-6 pt-1 font-kanit"> <!---เนื้อหา-->
-                            <h4 class="text-white text-xl font-bold">กุญแจรถเบนซ์</h4>
-                            <p class="text-base text-white">ผู้แจ้ง: แก้วเพรชรัตน์ สีสันต์</p>
-                            <p class="text-base text-white">สถานที่หาย: ข้างถนนบึงศรีฐาน</p>
-                            <p class="text-base text-white">ติดต่อที่: FB แก้วเพรชรัตน์ สีสันต์</p>
-                        </div>
-                    </div>
-                </a>
+                @endforelse
             </div>
-
-        </div>  <!-- End พบของหาย -->
-
+        </div>
 
         <div class="bg-slate-100 rounded-lg mt-5 flex flex-col items-center py-24 mx-auto w-3/4 shadow-2xl">
             <!---ของที่รับไปแล้ว-->
