@@ -1,7 +1,6 @@
 @extends('layouts.navbar')
 
 @section('content')
-
     <header class="flex-grow">
         <form action="" class="">
             <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden mt-8">
@@ -12,7 +11,8 @@
                     <img id="profileImage" src="{{ asset('img/frank.png') }}" alt="User Profile" class="w-16 h-16 rounded-full">
                     <p class="mt-1 text-sm text-gray-600">{{ auth()->user()->name }}</p>
                     <div class="flex justify-end">
-                        <a type="button" id="editProfile" href="#" class="hover:bg-gray-600 rounded-xl">Edit Profile</a>
+                        <a type="button" id="editProfile" href="#" class="hover:underline rounded-xl">Edit
+                            Profile</a>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
 
             <!-- Found Items History -->
             <div class="mt-12 text-center pt-3">
-                <p class="text-blue-500 hover:text-blue-600 font-kanit">ประวัติการแจ้งพบของ</p>
+                <p class="text-blue-500 hover:text-blue-600 font-kanit text-xl">ประวัติการแจ้งพบของ</p>
             </div>
         </form>
     </header>
@@ -76,15 +76,18 @@
                 <div class="rounded overflow-hidden shadow-lg flex flex-col">
                     <!-- Image Section -->
                     <a href="{{ route('item.detail', ['id' => $item->id]) }}" class="relative">
-                        <img class="w-full h-60 object-cover rounded-lg" src="{{ asset($imagePath ?? 'storage/uploads/default.png') }}" alt="{{ $item->type }}">
-                        <div class="hover:bg-transparent transition duration-300 absolute inset-0 bg-gray-900 opacity-25"></div>
+                        <img class="w-full h-60 object-cover rounded-lg"
+                            src="{{ asset($imagePath ?? 'storage/uploads/default.png') }}" alt="{{ $item->type }}">
+                        <div class="hover:bg-transparent transition duration-300 absolute inset-0 bg-gray-900 opacity-25">
+                        </div>
                         <div class="font-kanit text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3">
-                            {{ $item->type }}
+                            "{{ $item->type }}"
                         </div>
                     </a>
                     <!-- Content Section -->
                     <div class="px-6 py-4 mb-auto">
-                        <a href="{{ route('item.detail', ['id' => $item->id]) }}" class="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2 font-kanit">
+                        <a href="{{ route('item.detail', ['id' => $item->id]) }}"
+                            class="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2 font-kanit">
                             {{ $item->title }}
                         </a>
                         <p class="text-gray-500 text-sm">
@@ -94,8 +97,27 @@
                     <!-- Footer Section -->
                     <div class="px-6 py-3 flex items-center justify-between bg-gray-100">
                         <span class="py-1 text-xs text-gray-900 flex items-center">
-                            <span class="ml-1">{{ $item->created_at->diffForHumans() }}</span>
+                            <span class="ml-1"><i class="fa-solid fa-clock mr-1"></i>
+                                {{ $item->created_at->diffForHumans() }}</span>
                         </span>
+
+                        <div>
+                            <a href="{{ url('edituploadFound/' . $item->id) }}">
+                                <button
+                                    class="rounded-md bg-purple-500 py-1 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-purple-700 focus:shadow-none active:bg-purple-700 hover:bg-purple-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+                                    type="button">
+                                    <i class="fa-solid fa-pen mr-1"></i>Edit
+                                </button>
+                            </a>
+                            <a href="{{ url('delete/' . $item->id) }}">
+                                <button
+                                    class="rounded-md bg-red-500 py-1 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+                                    type="button"
+                                    onclick="return sure()">
+                                    <i class="fa-solid fa-trash mr-1"></i> Deleted
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             @empty
@@ -110,7 +132,7 @@
     <!-- Lost Items History -->
     <section>
         <div class="mt-12 text-center pt-3">
-            <p class="text-blue-500 hover:text-blue-600 font-kanit">ประวัติการแจ้งค้นหาของ</p>
+            <p class="text-blue-500 hover:text-blue-600 font-kanit text-xl">ประวัติการแจ้งค้นหาของ</p>
         </div>
 
         <div class="max-w-screen-xl mx-auto p-5">
@@ -131,15 +153,20 @@
                     <div class="rounded overflow-hidden shadow-lg flex flex-col">
                         <!-- Image Section -->
                         <a href="{{ route('item.detail', ['id' => $item->id]) }}" class="relative">
-                            <img class="w-full h-60 object-cover rounded-lg" src="{{ asset($imagePath ?? 'storage/uploads/default.png') }}" alt="{{ $item->type }}">
-                            <div class="hover:bg-transparent transition duration-300 absolute inset-0 bg-gray-900 opacity-25"></div>
-                            <div class="font-kanit text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3">
-                                {{ $item->type }}
+                            <img class="w-full h-60 object-cover rounded-lg"
+                                src="{{ asset($imagePath ?? 'storage/uploads/default.png') }}" alt="{{ $item->type }}">
+                            <div
+                                class="hover:bg-transparent transition duration-300 absolute inset-0 bg-gray-900 opacity-25">
+                            </div>
+                            <div
+                                class="font-kanit text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3">
+                                "{{ $item->type }}"
                             </div>
                         </a>
                         <!-- Content Section -->
                         <div class="px-6 py-4 mb-auto">
-                            <a href="{{ route('item.detail', ['id' => $item->id]) }}" class="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2 font-kanit">
+                            <a href="{{ route('item.detail', ['id' => $item->id]) }}"
+                                class="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2 font-kanit">
                                 {{ $item->title }}
                             </a>
                             <p class="text-gray-500 text-sm">
@@ -149,7 +176,8 @@
                         <!-- Footer Section -->
                         <div class="px-6 py-3 flex items-center justify-between bg-gray-100">
                             <span class="py-1 text-xs text-gray-900 flex items-center">
-                                <span class="ml-1">{{ $item->created_at->diffForHumans() }}</span>
+                                <span class="ml-1"><i
+                                        class="fa-solid fa-clock mr-1"></i>{{ $item->created_at->diffForHumans() }}</span>
                             </span>
                         </div>
                     </div>
@@ -158,10 +186,16 @@
                         <p class="text-2xl font-kanit text-gray-500">ไม่มีประวัติการแจ้งค้นหาของ</p>
                     </div>
                 @endforelse
-
             </div>
         </div>
     </section>
 
     @include('layouts.footer')
 @endsection
+
+
+<script>
+    function sure() {
+        return confirm("Are you sure you want to delete this post?");
+    }
+</script>

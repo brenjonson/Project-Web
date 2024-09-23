@@ -3,10 +3,10 @@
 
 @section('contentUpload')
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    <h1 class="text-5xl font-bold text-center py-8 text-black font-kanit">แจ้งพบของ</h1>
+    <h1 class="text-5xl font-bold text-center py-8 text-black font-kanit">แก้ไขข้อมูล</h1>
 
     <div class="max-w-3xl bg-gray-700 mx-auto p-8 rounded-xl shadow-2xl">
-        <form action="{{ route('uploadFound') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="{{ url('editItem/updated/' . $updateData->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Left -->

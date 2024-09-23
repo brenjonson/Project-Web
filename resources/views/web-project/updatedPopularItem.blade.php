@@ -4,12 +4,16 @@
     @include('layouts.banner')
 
     <header>
-
-        <div class="container flex justify-center mt-8 max-w-full ">
-            <button
-                class="font-kanit text-white bg-blue-400 dark:bg-orange-600   rounded-full text-2xl px-24 py-3.5 text-center hover:bg-orange-700 ">
-                <a href="#">ของที่หายบ่อย</a>
-            </button>
+        <div class="container flex justify-center mt-8 max-w-full px-4">
+            <div class="w-1/4 max-w-4xl">
+                <a href="{{ route('popularItem') }}">
+                    <button
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 px-6 md:px-8 rounded-lg flex items-center justify-center font-kanit text-xl md:text-2xl transition-transform transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <i class="fa-solid fa-location-dot mr-3"></i>
+                        ของที่หายบ่อย
+                    </button>
+                </a>
+            </div>
         </div>
     </header>
 

@@ -10,6 +10,10 @@ Route::view('/search', 'web-project.search')->name('search');
 Route::get('/popularItem', [FileUploadController::class, 'showItem'])->name('popularItem');
 Route::get('/item/{id}', [FileUploadController::class, 'showItemDetail'])->name('item.detail');
 Route::get('/search', [FileUploadController::class, 'showForSearch'])->name('search');
+Route::get('/delete/{id}',[FileUploadController::class,"delete"]);
+Route::get('/edituploadFound/{id}', [FileUploadController::class, 'edit']);
+Route::post('editItem/updated/{id}',[FileUploadController::class,"update"]);
+
     
 // Authentication routes
 Route::middleware(['auth'])->group(function () {
@@ -23,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/location/store', [LocationController::class, 'saveLocation']);;
     Route::view('/lost', 'web-project.LostItemFound')->name('lost');
     Route::get('/member', [FileUploadController::class, 'showForMember'])->name('member');
+    
 });
 
 // Jetstream dashboard route
