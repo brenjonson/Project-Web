@@ -3,10 +3,10 @@
 
 @section('contentUpload')
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    <h1 class="text-5xl font-bold text-center py-8 text-black font-kanit">แจ้งพบของ</h1>
+    <h1 class="text-5xl font-bold text-center py-8 text-black font-kanit">แก้ไขข้อมูล</h1>
 
     <div class="max-w-3xl bg-gray-700 mx-auto p-8 rounded-xl shadow-2xl">
-        <form action="{{ route('uploadFound') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="{{ url('editItem/updated/' . $updateData->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Left -->
@@ -18,7 +18,7 @@
                     </div>
                     <div>
                         <img id="preview" class="mt-4 rounded-lg w-full max-w-xs border border-gray-600"
-                            src="storage/uploads/Rick.png" alt="Image Preview">
+                            alt="Image Preview">
                     </div>
 
                     <div class="mt-6">
@@ -48,7 +48,7 @@
 
                     <div>
                         <label for="type" class="block mb-2 font-kanit text-white">ประเภทของที่พบ</label>
-                        <select id="type" name="type" required
+                        <select id="type" name="type" required 
                             class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                             <option value="" selected>จงเลือกประเภท</option>
                             <option value="key">กุญแจ</option>
@@ -70,10 +70,10 @@
                         <label for="base-input" class="block mb-2 font-kanit text-white">สถานที่พบ</label>
                         <input type="text" id="base-input" name="location" required placeholder="กรอกที่นี่"
                             class="w-full mb-2 p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                        <input type="button" onclick="getLocation()"
+                        <input type="button" onclick="getLocation()" 
                            class="w-1/2 mb-2 text-white text-sm p-3 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 shadow-lg transform hover:scale-105 transition duration-300 ease-in-out focus:ring-4 focus:ring-red-300 focus:outline-none" value="Use Current Location"/>
-                        <input type="text" id="base-input2" placeholder="Location will appear here"
-                            class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                        <input type="text" id="base-input2" placeholder="Location will appear here" 
+                            class="w-full p-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">   
                         <input type="hidden" id="latitude" name="latitude">
                         <input type="hidden" id="longitude" name="longitude">
                     </div>

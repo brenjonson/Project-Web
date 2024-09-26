@@ -26,6 +26,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/location/store', [LocationController::class, 'saveLocation']);;
     Route::view('/lost', 'web-project.LostItemFound')->name('lost');
     Route::get('/member', [FileUploadController::class, 'showForMember'])->name('member');
+    Route::get('/delete/{id}',[FileUploadController::class,"delete"]);
+    Route::get('/edituploadFound/{id}', [FileUploadController::class, 'edit']);
+    Route::post('editItem/updated/{id}',[FileUploadController::class,"update"]);
+    // New route for updating item stage to 'success'
+    Route::post('/item/{id}/success', [FileUploadController::class, 'markAsSuccess'])->name('item.success');
 });
 
 // Jetstream dashboard route

@@ -1,4 +1,3 @@
-<!-- resources/views/navbar.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +16,11 @@
             dropdownMenu.classList.toggle('hidden');
         }
 
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
         // Close dropdown if clicked outside
         window.onclick = function(event) {
             const dropdownMenu = document.getElementById('dropdownMenu');
@@ -32,63 +36,119 @@
             document.getElementById('logout-form').submit();
         }
     </script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
 
+            to {
+                opacity: 1;
+            }
+        }
 
-    <nav class="bg-orange-700 sticky top-0 z-0">
-        <div class="container mx-auto p-5 py-2 flex justify-between">
-            <div class="flex items-center">
-                <img src="./img/4.png" alt="" class="w-28 h-auto max-w-full"> <!---Logo-->
-            </div>
-
-            <ul class="flex justify-end mt-3 text-xl space-x-4">
-                <li>
-                    @auth
-                        <a href="{{ route('member') }}"
-                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                    @else
-                        <a href="{{ route('firstPage') }}"
-                            class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">หน้าหลัก</a>
-                    @endauth
-                </li>
-                <li>
-                    <a href="{{ route('search') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของหาย</a>
-                </li>
-                <li>
-                    <a href="{{ route('uploadFound') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">แจ้งพบของ</a>
-                </li>
-                <li>
-                    <a href="{{ route('uploadFind') }}"
-                        class="px-4 text-white font-kanit hover:bg-brown-300 hover:text-gray-300 rounded transition duration-300 ease-in-out">ค้นหาของ</a>
-                </li>
-                <div class="relative inline-block text-left">
-                    <!-- Dropdown Trigger -->
-                    <button onclick="toggleDropdown()"
-                        class="font-extrabold text-sm px-4 py-3 ml-6 -mt-2 rounded-full text-white bg-orange-600 border-2 border-orange-600 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
-                        <i class="fa-solid fa-user text-lg"></i>
-                    </button>
-
-                    <!-- Dropdown Menu -->
-                    <div id="dropdownMenu"
-                        class="hidden absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
-                        <div class="px-4 py-3">
-                            <p class="text-sm font-medium text-gray-900">My Account</p>
-                        </div>
-                        <div class="py-1">
-                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                            <a href="#" onclick="submitLogout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </div>
-            </ul>
-        </div>
-    </nav>
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-gray-100">
+    <nav class="bg-gradient-to-r from-orange-600 to-orange-700 shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="{{ route('member') }}"">
+                        <img src="./img/4.png" alt=""
+                            class="w-32 h-auto max-w-full transition-transform duration-300 ease-in-out transform hover:scale-105">
+                        <!---Logo-->
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center justify-end flex-1">
+                    <div class="flex items-baseline space-x-4">
+                        @auth
+                            <a href="{{ route('member') }}"
+                                class="text-white hover:bg-orange-500 hover:text-gray-100 px-3 py-2 rounded-md text-xl font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md font-kanit">หน้าหลัก</a>
+                        @else
+                            <a href="{{ route('firstPage') }}"
+                                class="text-white hover:bg-orange-500 hover:text-gray-100 px-3 py-2 rounded-md text-xl font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md font-kanit">หน้าหลัก</a>
+                        @endauth
+                        <a href="{{ route('search') }}"
+                            class="text-white hover:bg-orange-500 hover:text-gray-100 px-3 py-2 rounded-md text-xl font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md font-kanit">ค้นหาของหาย</a>
+                        <a href="{{ route('uploadFound') }}"
+                            class="text-white hover:bg-orange-500 hover:text-gray-100 px-3 py-2 rounded-md text-xl font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md font-kanit">แจ้งพบของ</a>
+                        <a href="{{ route('uploadFind') }}"
+                            class="text-white hover:bg-orange-500 hover:text-gray-100 px-3 py-2 rounded-md text-xl font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md font-kanit">ค้นหาของ</a>
+                        <div class="relative ml-3">
+                            <button onclick="toggleDropdown()"
+                                class="font-extrabold text-sm px-3 py-2 rounded-full text-white bg-orange-600 border-2 border-orange-500 hover:bg-white hover:text-orange-600 hover:border-orange-600 transition duration-300 ease-in-out shadow-lg transform hover:scale-105 flex items-center justify-center">
+                                <i class="fa-solid fa-user text-lg"></i>
+                            </button>
+                            <div id="dropdownMenu"
+                                class="hidden absolute right-0 w-48 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg animate-fadeIn">
+                                <div class="px-4 py-3 bg-orange-100">
+                                    <p class="text-sm font-medium text-orange-800">Account</p>
+                                </div>
+                                <div class="py-1">
+                                    <a href="{{ route('profile') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100 transition duration-200">Profile</a>
+                                    <a href="#" onclick="submitLogout()"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100 transition duration-200">Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button onclick="toggleMobileMenu()" type="button"
+                        class="bg-orange-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-orange-800 focus:ring-white transition duration-300 ease-in-out">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden animate-fadeIn">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-orange-600">
+                @auth
+                    <a href="{{ route('member') }}"
+                        class="text-white hover:bg-orange-500 hover:text-gray-100 block px-3 py-2 rounded-md text-base font-medium transition duration-300 ease-in-out font-kanit"><i class="fa-solid fa-house mr-2"></i>หน้าหลัก</a>
+                @else
+                    <a href="{{ route('firstPage') }}"
+                        class="text-white hover:bg-orange-500 hover:text-gray-100 block px-3 py-2 rounded-md text-base font-medium transition duration-300 ease-in-out">หน้าหลัก</a>
+                @endauth
+                <a href="{{ route('search') }}"
+                    class="text-white hover:bg-orange-500 hover:text-gray-100 block px-3 py-2 rounded-md text-base font-medium transition duration-300 ease-in-out font-kanit"> <i class="fa-solid fa-magnifying-glass mr-2"></i>ค้นหาของหาย</a>
+                <a href="{{ route('uploadFound') }}"
+                    class="text-white hover:bg-orange-500 hover:text-gray-100 block px-3 py-2 rounded-md text-base font-medium transition duration-300 ease-in-out font-kanit ml-1"><i class="fa-solid fa-exclamation mr-2"></i>แจ้งพบของหาย</a>
+                <a href="{{ route('uploadFind') }}"
+                    class="text-white hover:bg-orange-500 hover:text-gray-100 block px-3 py-2 rounded-md text-base font-medium transition duration-300 ease-in-out font-kanit"><i class="fa-solid fa-hand mr-2"></i>แจ้งค้นหาของ</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-orange-700 bg-orange-600">
+                <div class="flex items-center px-5">
+                    <div class="">
+                        <div class="text-base font-medium leading-none text-white font-kanit"><i class="fa-solid fa-user mr-2"></i>Account</div>
+                    </div>
+                </div>
+                <div class="mt-3 px-2 space-y-1">
+                    <a href="{{ route('profile') }}"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-orange-500 hover:text-gray-100 transition duration-300 ease-in-out font-kanit"><i class="fa-regular fa-address-card mr-2"></i>โปรไฟล์</a>
+                    <a href="#" onclick="submitLogout()"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-orange-500 hover:text-gray-100 transition duration-300 ease-in-out font-kanit"><i class="fa-solid fa-right-from-bracket mr-2"></i>ออกจากระบบ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     @yield('content')
 </body>
 
