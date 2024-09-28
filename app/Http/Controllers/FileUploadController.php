@@ -14,6 +14,19 @@ class FileUploadController extends Controller
         return view('web-project.updatedPopularItem', compact('items'));
     }
 
+    public function showForAdmin(Request $request)
+    {
+        $search = $request->input('search');
+        $itemsForAdmin = Item::when($search, function ($query) use ($search) {
+            return $query->where('item', 'like', "%{$search}%")
+                         ->orWhere('reporter_name', 'like', "%{$search}%")
+                         ->orWhere('location', 'like', "%{$search}%")
+                         ->orWhere('type', 'like', "%{$search}%");
+        })->get();
+
+        return view('web-project.admin.adminPage', compact('itemsForAdmin', 'search'));
+    }
+
     public function showForMember()
     {
         $itemsForMember = Item::all();
@@ -34,10 +47,28 @@ class FileUploadController extends Controller
 
     public function showProfile()
     {
-        $itemsForProfile = Item::all();;
+        $user = auth()->user();
+        $itemsForProfile = $user->items()->get();
         return view('web-project.profile', compact('itemsForProfile'));
     }
 
+    public function showForOther()
+    {
+        $itemsForMember = Item::all();
+        return view('web-project.otherForm.other', compact('itemsForMember'));
+    }
+
+    public function showForOtherFind()
+    {
+        $itemsForMember = Item::all();
+        return view('web-project.otherForm.otherFind', compact('itemsForMember'));
+    }
+
+    public function showForOtherSuccess()
+    {
+        $itemsForMember = Item::all();
+        return view('web-project.otherForm.otherSuccess', compact('itemsForMember'));
+    }
 
     public function delete($id)
     {
@@ -53,56 +84,57 @@ class FileUploadController extends Controller
         return view('web-project.uploadForm.edituploadFound', compact('updateData', 'items'));
     }
 
+    public function editFind($id)
+    {
+        $updateData = Item::find($id);
+        $items = Item::all();
+        return view('web-project.uploadForm.edituploadFind', compact('updateData', 'items'));
+    }
+
     public function update(Request $request, $id)
     {
         $fileValidator = Validator::make($request->all(), [
-            'files.*' => 'required|file|mimes:jpg,png,jpeg',
+            'files.*' => 'file|mimes:jpg,png,jpeg',
         ]);
 
-        $uploadedFiles = $request->file('files');
-        if (!$uploadedFiles) {
-            return back()->with('fail', 'No files were uploaded');
-        }
-
         if ($fileValidator->fails()) {
-            $errors = $fileValidator->errors();
-            $invalidFiles = [];
-
-            foreach ($request->file('files') as $index => $file) {
-                if (!in_array($file->getClientOriginalExtension(), ['jpg', 'png', 'jpeg'])) {
-                    $invalidFiles[] = $file->getClientOriginalName();
-                }
-            }
-
-            if (!empty($invalidFiles)) {
-                $errorMessage = 'The following files are not allowed: ' . implode(', ', $invalidFiles) . '. Only jpg, png, and jpeg files are permitted.';
-                return back()->with('fail', $errorMessage)->withInput();
-            }
-
-            return back()->withErrors($errors)->withInput();
+            return back()->withErrors($fileValidator->errors())->withInput();
         }
 
         $items = Item::find($id);
+        if (!$items) {
+            return redirect()->back()->with('fail', 'Item not found.');
+        }
+
         $items->item = $request->input('item');
         $items->reporter_name = $request->input('reporter_name');
         $items->type = $request->input('type');
         $items->detail = $request->input('detail');
         $items->location = $request->input('location');
         $items->contact = $request->input('contact');
-        foreach ($uploadedFiles as $index => $file) {
-            $fileName = $items->id . '-' . ($index + 1) . '.' . $file->getClientOriginalExtension();
-            $filePath = $file->storeAs('uploads', $fileName, 'public');
-            $fileNames[] = $fileName;
-        }
-
-        // Update img_path
-        $items->img_path = json_encode($fileNames);
         $items->latitude = $request->input('latitude');
         $items->longitude = $request->input('longitude');
         $items->stage = $request->input('stage');
+
+        // Handle file uploads
+        $fileNames = [];
+        if ($request->hasFile('files')) {
+            $uploadedFiles = $request->file('files');
+            foreach ($uploadedFiles as $index => $file) {
+                $fileName = $items->id . '-' . ($index + 1) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('uploads', $fileName, 'public');
+                $fileNames[] = $fileName;
+            }
+        }
+
+        if (!empty($fileNames)) {
+            $items->img_path = json_encode($fileNames);
+        }
+
         $items->save();
-        return redirect("/profile");
+        return redirect("/profile")->with('success', 'Item updated successfully.');
     }
+
 
     public function upload(Request $request)
     {
@@ -139,6 +171,7 @@ class FileUploadController extends Controller
 
         // Create new Item
         $newItem = new Item();
+        $newItem->user_id = auth()->user()->id;
         $newItem->item = $request->item;
         $newItem->reporter_name = $request->reporter_name;
         $newItem->type = $request->type;

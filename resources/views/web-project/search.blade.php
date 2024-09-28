@@ -1,4 +1,6 @@
 @extends('layouts.navbar')
+@vite('resources/css/other.css') {{-- นำเข้าไฟล์ CSS --}}
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
 @section('content')
     <div class="container mx-auto">
@@ -42,6 +44,7 @@
             <!-- Items List -->
             <div class="lg:w-1/3">
                 <h2 class="text-2xl font mb-4 font-kanit">รายการของหาย</h2>
+
 
                 <!-- Select Input -->
                 <div class="relative inline-block w-[180px] mb-6 ">

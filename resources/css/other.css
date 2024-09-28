@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.select-menu {
+    position: relative;
+    width: 200px;
+}
+
+.select-btn {
+    display: flex;
+    height: 40px;
+    background: #fff;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 8px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.select-btn i {
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.select-menu.active .select-btn i {
+    transform: rotate(-180deg);
+}
+
+.select-menu .options {
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 100;
+}
+
+.select-menu.active .options {
+    display: block;
+}
+
+.options .option {
+    display: flex;
+    height: 40px;
+    cursor: pointer;
+    padding: 0 16px;
+    border-radius: 8px;
+    align-items: center;
+    background: #fff;
+}
+
+.options .option:hover {
+    background: #F2F2F2;
+}
+
+.option i {
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+.option .option-text {
+    font-size: 16px;
+    color: #333;
+}

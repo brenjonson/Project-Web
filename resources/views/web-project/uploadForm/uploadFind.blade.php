@@ -2,7 +2,7 @@
 @extends('layouts.navbar')
 
 @section('contentUpload')
-    <h1 class="text-5xl font-bold text-center py-8 text-black font-kanit">ค้นหาของ</h1>
+    <h1 class="text-5xl font-bold text-center py-8 text-black font-kanit">แจ้งค้นหาของหาย</h1>
 
     <div class="max-w-3xl bg-gray-700 mx-auto p-8 rounded-xl shadow-2xl">
         <form action="{{ route('uploadFind') }}" method="POST" enctype="multipart/form-data" class="space-y-4">

@@ -15,33 +15,32 @@ function placeMarkers() {
             const lat = parseFloat(item.latitude);
             const lon = parseFloat(item.longitude);
 
-            // Map latitude and longitude to x and y
-            const x = ((lon - lonMin) / (lonMax - lonMin)) * mapWidth;
-            const y = ((latMax - lat) / (latMax - latMin)) * mapHeight;
+            // Check if the coordinates are within bounds
+            if (lat >= latMin && lat <= latMax && lon >= lonMin && lon <= lonMax) {
+                // Map latitude and longitude to x and y
+                const x = ((lon - lonMin) / (lonMax - lonMin)) * mapWidth;
+                const y = ((latMax - lat) / (latMax - latMin)) * mapHeight;
 
-            // Create marker element
-            const marker = document.createElement('div');
-            marker.classList.add('map-marker');
-            marker.style.left = `${x}px`;
-            marker.style.top = `${y}px`;
+                // Create marker element
+                const marker = document.createElement('div');
+                marker.classList.add('map-marker');
+                marker.style.left = `${x}px`;
+                marker.style.top = `${y}px`;
 
-            // Add mouseover event to show popup
-            marker.addEventListener('mouseover', () => {
-                showPopup(item, marker);
-            });
+                // Add event listeners
+                marker.addEventListener('mouseover', () => {
+                    showPopup(item, marker);
+                });
+                marker.addEventListener('mouseout', hidePopup);
+                marker.addEventListener('click', () => {
+                    window.location.href = `/item/${item.id}`;
+                });
 
-            // Add mouseout event to hide popup
-            marker.addEventListener('mouseout', () => {
-                hidePopup();
-            });
-
-            // Add click event to redirect to item detail page
-            marker.addEventListener('click', () => {
-                window.location.href = `/item/${item.id}`;
-            });
-
-            // Append marker to container
-            markersContainer.appendChild(marker);
+                // Append marker to container
+                markersContainer.appendChild(marker);
+            } else {
+                console.warn(`Item is out of bounds and will not be displayed.`);
+            }
         }
     });
 }

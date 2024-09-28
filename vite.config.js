@@ -12,4 +12,8 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        host: '10.153.58.109', // ให้รองรับการเข้าถึงจากทุก IP
+        port: 5173, // หรือพอร์ตที่คุณต้องการ
+    },
 });
