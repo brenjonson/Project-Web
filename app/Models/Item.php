@@ -10,6 +10,20 @@ class Item extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'user_id',
+        'item',
+        'reporter_name',
+        'type',
+        'detail',
+        'location',
+        'contact',
+        'img_path',
+        'latitude',
+        'longitude',
+        'stage',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
